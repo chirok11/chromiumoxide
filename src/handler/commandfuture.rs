@@ -20,9 +20,8 @@ pin_project! {
         rx_command: oneshot::Receiver<M>,
         #[pin]
         target_sender: mpsc::Sender<TargetMessage>,
-        // We need delay to be pinned because it's a future
-        // and we need to be able to poll it
-        // it is used to timeout the command if page was closed while waiting for response
+
+        /// Used to timeout the command if the page was closed while waiting for response
         #[pin]
         delay: futures_timer::Delay,
 
